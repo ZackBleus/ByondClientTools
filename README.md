@@ -7,3 +7,5 @@ Compile, place the compiled .dll "ByondClientTools.dll" by default in your BYOND
 ```
 call_ext("ByondClientTools.dll", "init")()
 ```
+
+If you need to need to profile a client that is not running the world locally, you must inject the .dll into the DreamSeeker application using a .dll injector such as [This one](https://github.com/adamhlt/DLL-Injector).
