@@ -1,0 +1,22 @@
+#include "Hook.h"
+
+BOOL WINAPI DllMain(const HINSTANCE hinstDLL, const DWORD fdwReason, LPVOID lpReserved)
+{
+	if (fdwReason == DLL_PROCESS_ATTACH)
+	{
+		DisableThreadLibraryCalls(hinstDLL);
+		Hook::hDDLModule = hinstDLL;
+		CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)Hook::HookDirectX, nullptr, 0, nullptr);
+	}
+
+	if (fdwReason == DLL_PROCESS_DETACH)
+		Hook::UnHookDirectX();
+
+	return TRUE;
+}
+
+extern "C" __declspec(dllexport) char* init(int n, char* v[])
+{
+	return 0;
+}
+
